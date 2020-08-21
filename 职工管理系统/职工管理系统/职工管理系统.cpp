@@ -1,9 +1,5 @@
 #include<iostream>
 #include"workerManager.h"
-#include<string>
-#include"worker.h"
-#include"employee.h"
-#define MAX 1000
 using namespace std;
 
 int main()

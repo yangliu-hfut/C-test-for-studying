@@ -31,12 +31,16 @@ void WorkerManager::Add_Emp()
 	cout << "请输入添加人员数量：" << endl;
 	int addNum = 0;
 	cin >> addNum;
+
+
 	if (addNum > 0)
 	{
 		//计算新空间的大小
 		int newSize = this->m_EmpNum + addNum;
+
 		//开辟新空间
 		Worker ** newSpace = new Worker*[newSize];
+
 		//拷贝原来空间的数据
 		if (this->m_EmpArray != NULL)
 		{
@@ -51,14 +55,18 @@ void WorkerManager::Add_Emp()
 			int id;
 			string name;
 			int dSelect;
+
 			cout << "请输入第" << i + 1 << "个新成员学号" << endl;
 			cin >> id;
+
 			cout << "请输入第" << i + 1 << "个新成员姓名" << endl;
 			cin >> name;
+
 			cout << "请选择人员的级别：" << endl;
 			cout << "1.硕士" << endl;
 			cout << "2.博士" << endl;
 			cout << "3.老师" << endl;
+
 			cin >> dSelect;
 
 			Worker * worker = NULL;
@@ -75,23 +83,24 @@ void WorkerManager::Add_Emp()
 				break;
 			default:
 				break;
-				//将创建人员职责，存放在数组中
-				newSpace[this->m_EmpNum + i] = worker;
-
+			
 			}
-	
+			//将创建人员职责，存放在数组中
+			newSpace[this->m_EmpNum + i] = worker;
 		}
 	
 		//释放原有空间
-	
 		delete[] this->m_EmpArray;
+
 		//更新新空间指向
 		this->m_EmpArray = newSpace;
+
 		//更新新的人员数量
-		//this->m_EmpNum = newSize;
+		this->m_EmpNum = newSize;
+
+		this->save();
 	
 		cout << "成功添加了 " << addNum << "个新成员!" << endl;
-		this->save();
 		
 	}
 	else
@@ -106,11 +115,12 @@ void WorkerManager::save()
 {
 	ofstream ofs;
 	ofs.open(FILENAME, ios::out );
+	cout << "可以运行到这里" << endl;
 
 	for (int i = 0;i < this->m_EmpNum; i++)
 	{
-		ofs << this->m_EmpArray[i]->m_ID << " " 
-			<< this->m_EmpArray[i]->m_Name << " " 
+		ofs << this->m_EmpArray[i]->m_ID << " "
+			<< this->m_EmpArray[i]->m_Name << " "
 			<< this->m_EmpArray[i]->m_DeptID << endl;
 			
 	}
