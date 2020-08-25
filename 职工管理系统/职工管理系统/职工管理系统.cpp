@@ -20,6 +20,7 @@ int main()
 		ca.Add_Emp();
 			break;
 		case 2:
+			ca.showEmp();
 			break;
 		case 3:
 			break;

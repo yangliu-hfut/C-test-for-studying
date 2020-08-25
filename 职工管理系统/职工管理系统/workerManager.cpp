@@ -1,9 +1,49 @@
 #include"workerManager.h"
 WorkerManager::WorkerManager()
 {
-	//初始化
-	this->m_EmpNum = 0;
-	this->m_EmpArray = NULL;
+	//1.文件不存在
+	ifstream ifs;
+	ifs.open(FILENAME, ios::in);
+
+	if (!ifs.is_open())
+	{
+		cout << "文件不存在！" << endl;
+		this->m_EmpNum = 0;
+		this->m_EmpArray = NULL;
+		//初始化文件是否为空
+		this->m_FileIsEmpty = true;
+		ifs.close();
+		return;
+	}
+	//2.文件存在且为空
+	char c;
+	ifs >> c;
+	if (ifs.eof())
+	{
+		cout << "文件为空！" << endl;
+		this->m_EmpNum = 0;
+		this->m_EmpArray = NULL;
+		//初始化文件是否为空
+		this->m_FileIsEmpty = true;
+		ifs.close();
+		return;
+	}
+	//3.文件存在且不为空
+	int num = this->getEmpNum();
+	cout << "当前成员人数为：  " << num << endl;
+	this->m_EmpNum = num;
+
+	this->m_EmpArray = new Worker*[this->m_EmpNum];
+	this->init_Emp();
+
+	//for (int i = 0; i < this->m_EmpNum; i++)
+	//{
+	//	cout << "人员编号： " << this->m_EmpArray[i]->m_ID
+	//		<< "\t姓名： " << this->m_EmpArray[i]->m_Name
+	//		<< "\t职称： " << this->m_EmpArray[i]->m_DeptID << endl;
+
+
+	//}
 }
 void WorkerManager::Show_Meun()
 {
@@ -97,7 +137,10 @@ void WorkerManager::Add_Emp()
 
 		//更新新的人员数量
 		this->m_EmpNum = newSize;
+		//更新职工不为空
+		this->m_FileIsEmpty = false;
 
+		//存数据函数
 		this->save();
 	
 		cout << "成功添加了 " << addNum << "个新成员!" << endl;
@@ -115,7 +158,6 @@ void WorkerManager::save()
 {
 	ofstream ofs;
 	ofs.open(FILENAME, ios::out );
-	cout << "可以运行到这里" << endl;
 
 	for (int i = 0;i < this->m_EmpNum; i++)
 	{
@@ -126,6 +168,72 @@ void WorkerManager::save()
 	}
 	ofs.close();
 }
+//统计人数函数实现
+int WorkerManager::getEmpNum()
+{
+	ifstream ifs;
+	ifs.open(FILENAME, ios::in);//打开文件
+
+	int id;
+	string name;
+	int dId;
+
+	int num = 0;
+	while (ifs >> id && ifs >> name && ifs >> dId)
+	{
+		num++;
+	}
+	return num;
+}
+//初始化员工
+void WorkerManager::init_Emp()
+{
+	ifstream ifs;
+	ifs.open(FILENAME, ios::in);
+
+	int id;
+	string name;
+	int dId;
+	int index = 0;
+	//读数据
+	while (ifs >> id && ifs >> name && ifs >> dId)
+	{
+		Worker * worker = NULL;
+		if (dId == 1) //硕士
+		{
+			worker = new Employee(id, name, dId);
+		}
+		else if(dId == 2)//博士
+		{
+			worker = new Teacher(id, name, dId);
+		}
+		else //老师
+		{
+			worker = new Boss(id, name, dId);
+		}
+		this->m_EmpArray[index] = worker;
+		index++;
+	}
+	ifs.close();
+}
+//显示成员函数
+void WorkerManager::showEmp()
+{
+	if (this->m_FileIsEmpty)
+	{
+		cout << "文件不存在或者为空！" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < m_EmpNum; i++)
+		{
+			this->m_EmpArray[i]->showInfo();
+		}
+	}
+	system("pause");
+	system("cls");
+}
+
 WorkerManager::~WorkerManager()
 {
 	if (this->m_EmpArray != NULL)

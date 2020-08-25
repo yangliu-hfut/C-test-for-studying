@@ -28,7 +28,17 @@ public:
 	//保存数据函数
 	void save();
 
+   //文件是否为空标志位
+	bool m_FileIsEmpty;
 
+	//统计文件人数
+	int getEmpNum();
+
+	//初始化人员
+	void init_Emp();
+
+	//显示成员函数
+	void showEmp();
 	~WorkerManager();
 	//人员数组指针
 
