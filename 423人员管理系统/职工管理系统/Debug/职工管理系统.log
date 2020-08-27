@@ -1,0 +1,9 @@
+﻿H:\Visio studio\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(职工管理系统.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  Boss.cpp
+  dean.cpp
+  master.cpp
+  doctor.cpp
+  workerManager.cpp
+  423人员管理系统.cpp
+  正在生成代码...
+  职工管理系统.vcxproj -> C:\Users\Administrator\Desktop\testc++\职工管理系统\423人员管理系统\Debug\423人员管理系统.exe
