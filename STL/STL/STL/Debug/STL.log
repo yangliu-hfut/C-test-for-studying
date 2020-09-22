@@ -1,13 +1,2 @@
 ﻿  deque.cpp
-c:\users\administrator\source\repos\stl\stl\deque.cpp(187): error C2660: “compareStudent”: 函数不接受 0 个参数
-  c:\users\administrator\source\repos\stl\stl\deque.cpp(153): note: 参见“compareStudent”的声明
-c:\users\administrator\source\repos\stl\stl\deque.cpp(187): error C2660: “std::list<Student,std::allocator<_Ty>>::sort”: 函数不接受 1 个参数
-          with
-          [
-              _Ty=Student
-          ]
-  h:\visio studio\vc\tools\msvc\14.16.27023\include\list(1612): note: 参见“std::list<Student,std::allocator<_Ty>>::sort”的声明
-          with
-          [
-              _Ty=Student
-          ]
+  STL.vcxproj -> C:\Users\Administrator\Desktop\TEST_C++\test案例\STL\STL\Debug\STL.exe

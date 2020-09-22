@@ -6,132 +6,132 @@ using namespace std;
 #include<list>
 #include<algorithm>
 
-void printDeque(deque<int>&d)
-{
-	for (deque<int>::const_iterator it = d.begin(); it != d.end(); it++)
-	{
-		cout << *it << "  ";
-	}
-
-	cout << endl;
-}
-void test7()
-{
-	deque<int>d1;
-	for (int i = 0;i < 10 ; i++)
-	{
-		d1.push_back(i);
-	}
-	printDeque(d1);
-	
-	deque<int>d2(d1.begin(), d1.end());
-	printDeque(d2);
-
-	deque<int>d3(10,100);
-	printDeque(d3);
-
-	deque<int>d4(d3);
-	printDeque(d4);
-
-
-
-}
-/********************************************************************************************************************/
-void test8()
-{
-	deque<int>d1;
-
-	d1.push_back(100);
-	d1.push_back(500);
-	printDeque(d1);
-
-	d1.push_front(200);
-	printDeque(d1);
-
-	d1.pop_back();
-	printDeque(d1);
-
-	d1.pop_front();
-	printDeque(d1);
-
-	d1.push_back(1);
-	d1.push_back(2);
-	d1.push_back(3);
-	printDeque(d1);
-
-	d1.insert(d1.begin(), 700);
-	printDeque(d1);
-
-
-}
-/********************************************************************************************************************/
-class Person2
-{  
-public:
-	Person2(string name,int score)
-	{
-		this->m_Score = score;
-		this->m_Name = name;
-	}
-	string m_Name;
-	int m_Score;
-};
-void creatPerson(vector<Person2>&v)
-{
-	string nameSeed = "ABCDE";
-	for (int i = 0;i < 5;i ++)
-	{
-		string name = "选手";
-		name += nameSeed[i];
-		int score = 0;
-
-		Person2 p(name, score);
-
-		v.push_back(p);
-		
-	}
-}
-
-void setScore(vector<Person2>&v)
-{
-	for (vector<Person2>::iterator it = v.begin(); it != v.end(); it++)
-	{
-		deque<int>d;
-		for (int i = 0; i < 10; i++)
-		{
-			int score = rand() % 41 + 60;
-			d.push_back(score);
-		}
-		cout << "选手：  " << it->m_Name << "打分是： " << endl;
-		for (deque<int>::iterator dit = d.begin(); dit != d.end(); dit++)
-		{
-			cout << *dit << " ";
-		}
-		cout << endl;
-
-		sort(d.begin(), d.end());
-
-		d.pop_back();
-		d.pop_front();//去除最低最高分
-
-		int sum = 0;
-		for (deque<int>::iterator dit = d.begin(); dit != d.end(); dit++)
-		{
-			sum += *dit;
-		}
-		int avg = sum / d.size();
-		it->m_Score = avg;
-
-	}
-}
-
-void showScore(vector<Person2>&v)
-{
-	for (vector<Person2>::iterator it = v.begin();it !=v.end(); it++)
-	{
-		cout << "姓名：  " << it->m_Name << "所得平均分是： " << it->m_Score << endl;
-	}
-}
+//void printDeque(deque<int>&d)
+//{
+//	for (deque<int>::const_iterator it = d.begin(); it != d.end(); it++)
+//	{
+//		cout << *it << "  ";
+//	}
+//
+//	cout << endl;
+//}
+//void test7()
+//{
+//	deque<int>d1;
+//	for (int i = 0;i < 10 ; i++)
+//	{
+//		d1.push_back(i);
+//	}
+//	printDeque(d1);
+//	
+//	deque<int>d2(d1.begin(), d1.end());
+//	printDeque(d2);
+//
+//	deque<int>d3(10,100);
+//	printDeque(d3);
+//
+//	deque<int>d4(d3);
+//	printDeque(d4);
+//
+//
+//
+//}
+///********************************************************************************************************************/
+//void test8()
+//{
+//	deque<int>d1;
+//
+//	d1.push_back(100);
+//	d1.push_back(500);
+//	printDeque(d1);
+//
+//	d1.push_front(200);
+//	printDeque(d1);
+//
+//	d1.pop_back();
+//	printDeque(d1);
+//
+//	d1.pop_front();
+//	printDeque(d1);
+//
+//	d1.push_back(1);
+//	d1.push_back(2);
+//	d1.push_back(3);
+//	printDeque(d1);
+//
+//	d1.insert(d1.begin(), 700);
+//	printDeque(d1);
+//
+//
+//}
+///********************************************************************************************************************/
+//class Person2
+//{  
+//public:
+//	Person2(string name,int score)
+//	{
+//		this->m_Score = score;
+//		this->m_Name = name;
+//	}
+//	string m_Name;
+//	int m_Score;
+//};
+//void creatPerson(vector<Person2>&v)
+//{
+//	string nameSeed = "ABCDE";
+//	for (int i = 0;i < 5;i ++)
+//	{
+//		string name = "选手";
+//		name += nameSeed[i];
+//		int score = 0;
+//
+//		Person2 p(name, score);
+//
+//		v.push_back(p);
+//		
+//	}
+//}
+//
+//void setScore(vector<Person2>&v)
+//{
+//	for (vector<Person2>::iterator it = v.begin(); it != v.end(); it++)
+//	{
+//		deque<int>d;
+//		for (int i = 0; i < 10; i++)
+//		{
+//			int score = rand() % 41 + 60;
+//			d.push_back(score);
+//		}
+//		cout << "选手：  " << it->m_Name << "打分是： " << endl;
+//		for (deque<int>::iterator dit = d.begin(); dit != d.end(); dit++)
+//		{
+//			cout << *dit << " ";
+//		}
+//		cout << endl;
+//
+//		sort(d.begin(), d.end());
+//
+//		d.pop_back();
+//		d.pop_front();//去除最低最高分
+//
+//		int sum = 0;
+//		for (deque<int>::iterator dit = d.begin(); dit != d.end(); dit++)
+//		{
+//			sum += *dit;
+//		}
+//		int avg = sum / d.size();
+//		it->m_Score = avg;
+//
+//	}
+//}
+//
+//void showScore(vector<Person2>&v)
+//{
+//	for (vector<Person2>::iterator it = v.begin();it !=v.end(); it++)
+//	{
+//		cout << "姓名：  " << it->m_Name << "所得平均分是： " << it->m_Score << endl;
+//	}
+//}
 /********************************************************************************************************************/
 //排序案例
 //排序规则
@@ -154,12 +154,12 @@ bool compareStudent(Student &s1, Student &s2)
 {
 	if (s1.m_Age == s1.m_Age)
 	{
-		return s1.m_Height < s2.m_Height;
+		return s1.m_Height<s2.m_Height;
 	
 	}
 	else
 	{
-		return s1.m_Age > s2.m_Age;
+		return s1.m_Age>s2.m_Age;
 	}
 }
 void test9()
