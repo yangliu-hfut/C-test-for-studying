@@ -28,6 +28,7 @@ int main()
 			s.showRecord();
 			break;
 		case 3:
+			s.clearRecord();
 			break;
 		case 0:
 			s.exitsystem();

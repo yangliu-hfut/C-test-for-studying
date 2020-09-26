@@ -51,6 +51,9 @@ public:
 
 	void showRecord();//显示往届比赛记录
 
+	void clearRecord();//清空记录
+
+
 	//成员属性
 	vector<int>v1;
 

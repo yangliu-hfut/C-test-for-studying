@@ -35,6 +35,8 @@ void speechManager::initSpeech()
 	this->m_Speaker.clear();
 
 	this->m_Idex = 1;
+
+	this->m_Record.clear();
 }
 
 void speechManager::creatSpeaker()
@@ -217,6 +219,8 @@ void speechManager::saveRecord()
 	ofs.close();
 
 	cout << "结果储存成功！" << endl;
+
+	this->fileIsempty = false;
 }
 
 void speechManager::loadRecord()
@@ -227,7 +231,7 @@ void speechManager::loadRecord()
 	if (!ifs.is_open())
 	{
 		this->fileIsempty = true;
-		cout << "文件不存在！" << endl;
+		//cout << "文件不存在！" << endl;
 		ifs.close();
 		return;
 	}
@@ -235,7 +239,7 @@ void speechManager::loadRecord()
 	ifs >> ch;
 	if (ifs.eof())//没有文件结尾
 	{
-		cout << "文件为空！" << endl;
+		//cout << "文件为空！" << endl;
 		this->fileIsempty = true;
 		ifs.close();
 		return;
@@ -262,7 +266,7 @@ void speechManager::loadRecord()
 		while (true)
 		{
 			pos = data.find(",", start);
-			if (pos = -1)
+			if (pos == -1)
 			{
 				break;
 				//没找到逗号
@@ -286,12 +290,48 @@ void speechManager::loadRecord()
 
 void speechManager::showRecord()
 {
+	if (this->fileIsempty)
+	{
+		cout << "文件不存在，或记录为空" << endl;
+	}
+	else
+	{
 	for (int i = 0;i<this->m_Record.size();i++)
 	{
-		if (i >= this->m_Record.size() || i < 0) { cout << "vector下标越界" << endl; break; }
-		cout << "第" << i + 1 << "届比赛的冠军编号是：" << this->m_Record[i][0] << "  其得分是：" << this->m_Record[i][1] << endl;
-		cout << "第" << i + 1 << "届比赛的亚军编号是：" << this->m_Record[i][2] << "  其得分是：" << this->m_Record[i][3] << endl;
-		cout << "第" << i + 1 << "届比赛的季军编号是：" << this->m_Record[i][4] << "  其得分是：" << this->m_Record[i][5] << endl;
+		
+			//if (i >= this->m_Record.size() || i < 0) { cout << "vector下标越界" << endl; break; }
+			cout << "第" << i + 1 << "届 "
+				<< "冠军编号：" << this->m_Record[i][0] << " 得分： " << this->m_Record[i][1] << " "
+				<< "亚军编号：" << this->m_Record[i][2] << " 得分： " << this->m_Record[i][3] << " "
+				<< "季军编号：" << this->m_Record[i][4] << " 得分： " << this->m_Record[i][5] << endl;
+		}
+	}
+	system("pause");
+	system("cls");
+}
+
+void speechManager::clearRecord()
+{
+	cout << "确认进行清空操作么？清空后将不可恢复。" << endl;
+	cout << "1.确认" << endl;
+	cout << "2.返回" << endl;
+
+	int choose = 0;
+	cin >> choose;
+
+	if (choose)
+	{
+		ofstream ofs("speech.csv", ios::trunc);//trunc 清空文件中所有数据
+
+		ofs.clear();
+
+		this->initSpeech();
+
+		this->creatSpeaker();
+
+		this->loadRecord();
+
+		cout << "清空成功！" << endl;
 	}
 	system("pause");
 	system("cls");
